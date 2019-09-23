@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">
+    <h3>双大括号</h3>
+    <div>{{msg}}</div> <!--textContent-->
+    <div>{{msg.toUpperCase()}}</div> <!--textContent-->
+    <div v-text="msg"></div> <!--textContent-->
+    <div v-html="msg"></div> <!--innerHTML-->
+    <hr>
+    <h3>指令：强制数据绑定</h3>
+    <img src="imgURL">
+    <img v-bind:src="imgURL">
+    <h3>指令：绑定事件监听</h3>
+    <button v-on:click="test(1)">Click</button>
+  </div>
+  <script src="JS/vue.js"></script>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        msg: '<a href="#">click here!</a>',
+        imgURL: 'https://cn.vuejs.org/images/logo.png'
+      },
+      methods: {
+        test(a) {
+          this.msg = 'change'
+          alert(a)
+        }
+      }
+    })
+  </script>
+</body>
+</html>
