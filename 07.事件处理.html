@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+<body>
+  <div id="demo">
+    <h3>绑定监听</h3>
+    <button @click="test">test</button>
+    <button @click="test2(123, $event)">test2</button>
+    <h3>事件修饰符</h3>
+    <div style="width: 200px;height: 200px;background: red" @click="test3">
+      <div style="width: 100px;height: 100px;background: blue" @click.stop="test4"></div>
+    </div>
+    <h3>按键修饰符</h3>
+    <input type="text" name="" id="" @keyup.enter="test5">
+  </div>
+  <script src='JS/vue.js'></script>
+  <script>
+    new Vue({
+      el: '#demo',
+      data: {
+      },
+      methods: {
+        test(e) {
+          console.log(e.target.innerHTML)
+        },
+        test2(num, e) {
+          console.log(num, e.target.innerHTML)
+        },
+        test3() {
+          alert('外')
+        },
+        test4() {
+          alert('内')
+        },
+        test5(event) {
+          alert(event.target.value)
+        }
+      },
+    })
+  </script>
+</body>
+</html>
