@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="demo">
+    <span v-show="flag">测试生命周期</span><br>
+    <button @click="destoryVM">Destory</button>
+  </div>
+  <script src='JS/vue.js'></script>
+  <script>
+    new Vue({
+      el: '#demo',
+      data: {
+        flag: true
+      },
+      methods: {
+        destoryVM() {
+          this.$destroy()
+        }
+      },
+      mounted() {
+        this.interval = setInterval(() => { // 如果不清除定时器会造成内存泄漏
+          console.log('定时器')
+          this.flag = !this.flag
+        },1000)
+      },
+      beforeDestroy() {
+        clearInterval(this.interval)
+      },
+    })
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>Document</title>
+  <style>
+    /* 显示、隐藏的过渡效果 */
+    .fade-enter-active,
+    .fade-leave-active {
+      transition: opacity .5s;
+    }
+    /* 隐藏时的样式*/
+    .fade-enter,
+    .fade-leave-to {
+      opacity: 0;
+    }
+
+    /* 开始显示 */
+    .fade2-enter {
+      transform: translateX(100px);
+    }
+    /* 显示过程 */
+    .fade2-enter-active {
+      transition: all 1s;
+    }
+    /* 显示完成 */
+    .fade2-enter-to {
+      transform: translateX(-100px);
+    }
+    /* 开始隐藏 */
+    .fade2-leave {
+      transform: translateX(0px);
+    }
+    /* 隐藏过程 */
+    .fade2-leave-active {
+      transition: all 3s;
+      color: white
+    }
+    /* 隐藏完成 */
+    .fade2-leave-to {
+      background: green;
+      transform: translateX(50px);
+    }
+  </style>
+</head>
+
+<body>
+  <div id="demo">
+    <button @click="flag = !flag">toggle</button>
+    <transition name="fade">
+      <p v-show="flag">Hello</p>
+    </transition>
+    <button @click="flag2 = !flag2">toggle</button>
+    <transition name="fade2">
+      <p v-show="flag2">Hello</p>
+    </transition>
+  </div>
+  <script src='JS/vue.js'></script>
+  <script>
+    new Vue({
+      el: '#demo',
+      data: {
+        flag: true,
+        flag2: true
+      }
+    })
+  </script>
+</body>
+
+</html>
