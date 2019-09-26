@@ -1,23 +1,51 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div>
+    <h2>评论列表</h2>
+    <div class="container">
+      <Add></Add>
+      <List :comments="comments"></List>
+    </div>
   </div>
 </template>
 
 <script>
+import Add from './components/Add'
+import Item from './components/Item'
+import List from './components/List'
 export default {
-  name: 'App'
+  data () {
+    return {
+      comments: [
+        {
+          name: 'Mike',
+          content: '有一说一'
+        },
+        {
+          name: 'John',
+          content: '说实话'
+        },
+        {
+          name: 'Bob',
+          content: '平心而论'
+        },
+        {
+          name: 'Tom',
+          content: '就事论事'
+        },
+        {
+          name: 'Jim',
+          content: '确实'
+        }
+      ]
+    }
+  },
+  components: {
+    Add,
+    Item,
+    List
+  }
 }
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style scoped>
 </style>
