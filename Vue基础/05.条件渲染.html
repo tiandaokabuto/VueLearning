@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
 </head>
-
 <body>
-  <div id="app"> <!--view-->
-    {{ message }}
+  <div class="demo">
+    <div v-if="ok">成功</div>
+    <div v-else>失败</div>
+    <div v-show="yes">YES</div>
+    <div v-show="no">NO</div>
   </div>
-  <script src="JS/vue.js"></script>
+  <script src="../JS/vue.js"></script>
   <script>
-    // 创建一个Vue实例，是一个vm对象
-    const vm = new Vue({ // 配置对象
-      el: '#app', // element: '选择器'
-      data: { // 数据(model)
-        message: 'Hello Vue!'
+    new Vue({
+      el: '.demo',
+      data: {
+        ok: true,
+        yes: true,
+        no: false
       }
     })
   </script>
 </body>
-
 </html>
