@@ -1,7 +1,7 @@
 <template>
   <li class="list-group-item">
     <div class="handle">
-      <a href="javascript:;">删除</a>
+      <a href="javascript:;" @click="deleteComment(index)">删除</a>
     </div>
     <p class="user">
       <span>{{comment.name}}</span>
@@ -22,7 +22,13 @@ export default {
 
   },
   props: {
-    comment: {}
+    comment: {},
+    index: Number
+  },
+  methods: {
+    deleteComment(index) {
+      this.$emit('deleteComment', index)
+    }
   }
 }
 </script>
@@ -42,7 +48,7 @@ li {
   border: 1px solid #ccc;
   background: #fff;
   position: absolute;
-  right: 10px;
+  left: 300px;
   top: 1px;
   text-align: center;
 }

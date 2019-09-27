@@ -2,8 +2,8 @@
   <div>
     <h2>评论列表</h2>
     <div class="container">
-      <Add></Add>
-      <List :comments="comments"></List>
+      <Add @addComment="addComment"></Add>
+      <List :comments="comments" @deleteComment="deleteComment"></List>
     </div>
   </div>
 </template>
@@ -15,7 +15,7 @@ import List from './components/List'
 export default {
   data () {
     return {
-      comments: [
+      comments: [ // 数据在哪个组件，更新数据的方法就应该在哪个组件
         {
           name: 'Mike',
           content: '有一说一'
@@ -43,6 +43,14 @@ export default {
     Add,
     Item,
     List
+  },
+  methods: {
+    addComment(comment) {
+      this.comments.unshift(comment)
+    },
+    deleteComment(index) {
+      this.comments.splice(index, 1)
+    }
   }
 }
 </script>
