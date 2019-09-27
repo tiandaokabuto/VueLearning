@@ -1,9 +1,11 @@
 <template>
-  <li class="list-group-item">
+  <li class="list-group-item" :style="{background: bgColor}"
+  @mouseenter="handleEnter(true)" @mouseleave="handleEnter(false)">
     <div class="handle">
-      <a href="javascript:;" @click="deleteComment(index)">删除</a>
+      <a href="javascript:;" @click="deleteComment(index)" v-show="showDelete">删除</a>
     </div>
     <p class="user">
+      <input type="checkbox" v-model="comment.selected">
       <span>{{comment.name}}</span>
       <span>说：</span>
     </p>
@@ -15,11 +17,9 @@
 export default {
   data() {
     return {
-
+      showDelete: false,
+      bgColor: 'white'
     }
-  },
-  components: {
-
   },
   props: {
     comment: {},
@@ -27,7 +27,18 @@ export default {
   },
   methods: {
     deleteComment(index) {
-      this.$emit('deleteComment', index)
+      if (window.confirm('是否删除该评论')) {
+        this.$emit('deleteComment', index)
+      }
+    },
+    handleEnter(isEnter) {
+      if (isEnter) {
+        this.bgColor = '#ccc'
+        this.showDelete = true
+      } else {
+        this.bgColor = 'white'
+        this.showDelete = false
+      }
     }
   }
 }
@@ -45,7 +56,6 @@ li {
 
 .handle {
   width: 40px;
-  border: 1px solid #ccc;
   background: #fff;
   position: absolute;
   left: 300px;
@@ -55,6 +65,9 @@ li {
 
 .handle a {
   display: block;
+  background: red;
+  color: white;
+  border: 1px solid red;
   text-decoration: none;
 }
 

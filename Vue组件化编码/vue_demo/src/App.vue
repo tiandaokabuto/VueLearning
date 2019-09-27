@@ -3,7 +3,8 @@
     <h2>评论列表</h2>
     <div class="container">
       <Add @addComment="addComment"></Add>
-      <List :comments="comments" @deleteComment="deleteComment"></List>
+      <List :comments="comments" @deleteComment="deleteComment"
+      @selectAllComment="selectAllComment" @deleteSeleted="deleteSeleted"></List>
     </div>
   </div>
 </template>
@@ -18,23 +19,28 @@ export default {
       comments: [ // 数据在哪个组件，更新数据的方法就应该在哪个组件
         {
           name: 'Mike',
-          content: '有一说一'
+          content: '有一说一',
+          selected: false
         },
         {
           name: 'John',
-          content: '说实话'
+          content: '说实话',
+          selected: false
         },
         {
           name: 'Bob',
-          content: '平心而论'
+          content: '平心而论',
+          selected: false
         },
         {
           name: 'Tom',
-          content: '就事论事'
+          content: '就事论事',
+          selected: false
         },
         {
           name: 'Jim',
-          content: '确实'
+          content: '确实',
+          selected: false
         }
       ]
     }
@@ -50,6 +56,16 @@ export default {
     },
     deleteComment(index) {
       this.comments.splice(index, 1)
+    },
+    selectAllComment(check) {
+      this.comments.forEach(comment => {
+        comment.selected = check
+      })
+    },
+    deleteSeleted() {
+      this.comments = this.comments.filter(comment => {
+        return !comment.selected
+      })
     }
   }
 }
