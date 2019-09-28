@@ -13,36 +13,47 @@
 import Add from './components/Add'
 import Item from './components/Item'
 import List from './components/List'
+import storageUtil from './util/StorageUtil'
 export default {
   data () {
     return {
-      comments: [ // 数据在哪个组件，更新数据的方法就应该在哪个组件
-        {
-          name: 'Mike',
-          content: '有一说一',
-          selected: false
-        },
-        {
-          name: 'John',
-          content: '说实话',
-          selected: false
-        },
-        {
-          name: 'Bob',
-          content: '平心而论',
-          selected: false
-        },
-        {
-          name: 'Tom',
-          content: '就事论事',
-          selected: false
-        },
-        {
-          name: 'Jim',
-          content: '确实',
-          selected: false
-        }
-      ]
+      comments: storageUtil.readComments()
+      // [ // 数据在哪个组件，更新数据的方法就应该在哪个组件
+      //   {
+      //     name: 'Mike',
+      //     content: '有一说一',
+      //     selected: false
+      //   },
+      //   {
+      //     name: 'John',
+      //     content: '说实话',
+      //     selected: false
+      //   },
+      //   {
+      //     name: 'Bob',
+      //     content: '平心而论',
+      //     selected: false
+      //   },
+      //   {
+      //     name: 'Tom',
+      //     content: '就事论事',
+      //     selected: false
+      //   },
+      //   {
+      //     name: 'Jim',
+      //     content: '确实',
+      //     selected: false
+      //   }
+      // ]
+    }
+  },
+  watch: {
+    comments: {
+      deep: true, // 深度监视
+      // handler: function(value) {
+      //   storageUtil.saveComments(value)
+      // }
+      handler: storageUtil.saveComments // 把saveComments设置为回调函数，由于没有加括号所以不会执行，只是获取函数
     }
   },
   components: {
