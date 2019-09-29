@@ -49,3 +49,12 @@
   里面写的是打包文件夹的名称，然后npm run build重新打包，修改dist文件夹为项目的名称xxx，把xxx拷贝到运行的动态
   服务器的webapps文件夹下，访问localhost:8080/xxx。
 21.组件之间通讯有四种方式，props、vue自定义事件、消息订阅发布模式、slot、vuex。
+22.常见Vue的UI组件库有ElementUI（PC端），MintUI（移动端）。npm install -- save mint-ui进行MintUI的安装。有时
+  在组件库里面只会用到少部分组件，打包的时候按需打包会更好，npm install babel-component -D引入所需的包，然后在
+  配置文件.babelrc中修改配置，在"plugins"的数组中加入["component", [
+    {
+      "libraryName": "mint-ui",
+      "style": true
+    }
+  ]]。
+23.路由是一种映射关系，
