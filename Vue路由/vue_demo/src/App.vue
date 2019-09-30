@@ -1,11 +1,17 @@
 <template>
   <div class="page">
-    <mt-button type="danger" size="small" @click="handleClick">Click</mt-button>
+    <div class="title">
+      <span>TestRouter</span>
+    </div>
+    <router-link to="/home">Home</router-link>
+    <router-link to="/about">About</router-link>
+    <div style="height: 200px; width: 200px; background: black; color:white">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
-import {Toast} from 'mint-ui'
 export default {
   data () {
     return {
@@ -13,9 +19,7 @@ export default {
     }
   },
   methods: {
-    handleClick() {
-      Toast('test')
-    }
+
   }
 }
 </script>

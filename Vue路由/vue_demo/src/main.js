@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import App from './App.vue'
 import { Button, Cell } from 'mint-ui'
-import router from 'vue-router'
+import router from './router' // index.js是默认暴露
 
 // 注册成全局
 Vue.component(Button.name, Button)
@@ -13,8 +13,6 @@ new Vue({
   components: {
     App
   },
-  router: {
-
-  },
-  template: '<App/>'
+  template: '<App/>',
+  router
 })

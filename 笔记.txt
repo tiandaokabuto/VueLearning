@@ -57,4 +57,24 @@
       "style": true
     }
   ]]。
-23.路由是一种映射关系，
+23.路由是一种映射关系，通常在router文件夹里面创建一个index.js进行配置VueRouter。routes数组里面的一个对象为一个路
+  由，属性分别是path和component。在页面中使用router-link和router-view来分别进行跳转和显示。
+24.嵌套路由：在要嵌套的路由里面children属性，然后按常规方法添加路由配置。
+25.缓存路由组件：使用keep-alive。
+26.向路由组件传递消息：
+27.编程式路由导航：通过js的方式实现路由的跳转。有push和replace两种方式。this.$router.push(path)相当于点击路由链接
+  （可以返回到当前路由界面），this.$router.replace()用新路由替换旧的路由（不可以返回当前路由界面，会返回再上一个界
+  面）。
+28.分析源码前的准备：（1）将伪数组转换为真数组 [].splice.call(this)。（2）node.nodeType得到节点类型（document, 
+  element, attribute, text）。（3）Object.defineProperty(obj, propertyName, {}) 给对象添加属性。
+  （4）Object.keys(obj) 得到自身可枚举属性组成的数组。（5）obj.hasOwnProperty(prop) 判断prop是否是obj自身的属性。
+  （6）DocumentFragment 文档碎片（批量更新多个节点），如果不使用这个那么每次更新文档都要操作文档，会影响网页的速度。
+29.浏览器Debug调试。在检查界面中的Sources中打断点进行调试。调试时四个图标对应四个功能，图标1是执行下一个断点的操作，
+  图标2是单步操作，图标3是进入当前函数，图标4是退出当前函数。
+30.数据代理：通过一个对象代理另一个对象中属性的操作（读写）。在vue中是通过vm对象来代理data对象中所有的属性操作。
+  基本实现流程：
+  通过Object.defineProperty()给vm添加与data对象属性对应的属性描述符。
+  所有添加的属性都包含getter和setter。
+  在getter和setter内部去操作data中对应的属性数据。
+31.模板解析：
+

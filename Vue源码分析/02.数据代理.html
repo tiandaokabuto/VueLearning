@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>数据代理</title>
+</head>
+<body>
+  <div id="demo"></div>
+  <script src="./js/compile.js"></script>
+  <script src="./js/mvvm.js"></script>
+  <script src="./js/observer.js"></script>
+  <script src="./js/watcher.js"></script>
+  <script>
+    // Object.defineProperty实现 
+    const vm = new MVVM({
+      el: '#demo',
+      data: {
+        name: 'dededemo'
+      }
+    })
+    console.log(vm.name, vm)
+    vm.name = 'demomomo'
+    console.log(vm.name, vm._data.name)
+
+    /*
+     * 实现效果与
+     * const vm = new Vue({})一致
+    */
+  </script>
+</body>
+</html>

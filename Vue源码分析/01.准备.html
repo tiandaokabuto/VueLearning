@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <meta http-equiv='X-UA-Compatible' content='ie=edge'>
+  <title>准备</title>
+</head>
+<body>
+  <div id="test">test</div>
+  <ul id="fragment_test">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ul>
+  <!--
+    1.将伪数组转换为真数组 [].splice.call(this)
+    2.node.nodeType得到节点类型（document, element, attribute, text）
+    3.Object.defineProperty(obj, propertyName, {}) 给对象添加属性
+    4.Object.keys(obj) 得到自身可枚举属性组成的数组
+    5.obj.hasOwnProperty(prop) 判断prop是否是obj自身的属性
+    6.DocumentFragment 文档碎片（批量更新多个节点）
+  -->
+  <script>
+    // 1
+    const lis = document.getElementsByTagName('li')
+    console.log(lis instanceof Array) // false lis是伪数组
+    // Array.from(lis)可以转换为数组  ES6
+    const lis2 = Array.prototype.slice.call(lis) // ES5
+    console.log(lis2 instanceof Array)
+
+    // 2
+    const eleNode = document.getElementById('test')
+    const attrNode = eleNode.getAttributeNode('id')
+    const textNode = eleNode.firstChild
+    console.log(eleNode.nodeType, attrNode.nodeType, textNode.nodeType)
+
+    // 3
+    // 4
+    // 5
+    
+    // 6.DocumentFragment：文档碎片（高批量更新多个节点）
+    // document：显示对应的页面，包含了n个element，一旦更新document内部的某个元素就会更新界面
+    // documentFragment：在内存中保存n个element的容器对象（不与界面关联），如果更新界面中的某个
+    //                   element，界面不会更新。
+    const ul = document.getElementById('fragment_test')
+    // 创建fragment
+    const fragment = document.createDocumentFragment()
+    // 取出ul里面所有的子节点保存到fragment
+    let child
+    while(child = ul.firstChild) {
+      fragment.appendChild(child) // 取出ul的节点放入到fragment中，包括换行。取出后ul变空。
+    }
+    // 更新fragment中所有li的文本
+    Array.prototype.slice.call(fragment.childNodes).forEach(node => {
+      if (node.nodeType === 1) { // 元素节点li，换行为文本节点
+        node.textContent = 'change'
+      }
+    })
+    // 将fragment插入到ul
+    ul.appendChild(fragment)
+  </script>
+</body>
+</html>
