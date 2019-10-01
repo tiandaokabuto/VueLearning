@@ -1,10 +1,15 @@
 function Compile(el, vm) {
+    // 保存vm到compile对象
     this.$vm = vm;
+    // 将el对应的元素对象保存到compile对象中
     this.$el = this.isElementNode(el) ? el : document.querySelector(el);
-
+    // 如果有el元素
     if (this.$el) {
+        // 1.取出el元素中所有子节点保存到一个fragment对象中
         this.$fragment = this.node2Fragment(this.$el);
+        // 2.编译fragment中所有层次的子节点
         this.init();
+        // 3.将编译好的fragment添加到页面的el元素中
         this.$el.appendChild(this.$fragment);
     }
 }
@@ -28,20 +33,27 @@ Compile.prototype = {
     },
 
     compileElement: function(el) {
+        // 取出最外层所有子节点
         var childNodes = el.childNodes,
+            // 保存compile对象
             me = this;
-
+        // 遍历所有子节点（text/element）
         [].slice.call(childNodes).forEach(function(node) {
+            // 获得节点的文本内容
             var text = node.textContent;
+            // 创建正则对象(用来匹配大括号)
             var reg = /\{\{(.*)\}\}/;
 
             if (me.isElementNode(node)) {
+                // 解析指令
                 me.compile(node);
 
+                // 判断节点是否是大括号格式的文本节点
             } else if (me.isTextNode(node) && reg.test(text)) {
+                // 编译大括号表达式文本节点
                 me.compileText(node, RegExp.$1.trim());
             }
-
+            // 如果当前节点还有子节点,通过递归调用实现所有层次的节点的编译
             if (node.childNodes && node.childNodes.length) {
                 me.compileElement(node);
             }
@@ -91,7 +103,7 @@ Compile.prototype = {
     }
 };
 
-// 指令处理集合
+// 指令处理集合 v-xxx
 var compileUtil = {
     text: function(node, vm, exp) {
         this.bind(node, vm, exp, 'text');
@@ -164,8 +176,9 @@ var compileUtil = {
     }
 };
 
-
+// 更新节点的方法的工具对象
 var updater = {
+    // 更新节点的textContent属性
     textUpdater: function(node, value) {
         node.textContent = typeof value == 'undefined' ? '' : value;
     },
