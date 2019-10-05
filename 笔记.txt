@@ -100,4 +100,13 @@
   移除元素的指令属性。
 35.数据绑定-数据劫持：数据劫持是vue实现数据绑定的一种技术。基本思想，通过defineProperty()来监视data中所有属性
   （任意层次数据的变化，一旦变化就去更新界面）
-36.Vuex
+36.Vuex：组件读取state（对应data）进行初始化显示，或者对数据进行一些处理之后再读取getter（对应computed），
+  getter也以来state获取数据。组件通过dispatch()触发actions，actions使用commit()请求mutations去更新数据。
+  在组件里直接获取vuex的数据，state使用$store.state或者映射函数mapState()，getters使用$store.getter或者映射
+  函数mapGetters()，actions可以使用映射函数mapActions()。
+37.state：vuex管理的状态对象。xxx:xxx
+  mutations：包含多个直接更新state的方法（回调函数）的对象，由action中的commit(mutation名称)触发，只能写同步代码。
+            yyy(state, {data}){}
+  actions：包含多个事件回调函数的对象，通过commit()来触发mutation的调用，由组件中的$store.dispatch(action名称，参数)
+          来触发，可以包含异步代码。zzz({commit}, data){commit('yyy', {data})}
+  getters：包含多个计算属性的对象。由组件中的$store.getters.xxx来读取。ggg(state) {return ...}

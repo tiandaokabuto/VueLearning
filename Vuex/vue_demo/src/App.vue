@@ -1,47 +1,38 @@
 <template>
-  <div class="page">
-    <p>click {{$store.state.count}} times, count is {{evenOrOdd}}</p>
-    <button @click="increment">++</button>
-    <button @click="decrement">--</button>
-    <button @click="incrementIfOdd">increment if odd</button>
-    <button @click="incrementAsync">increment async</button>
+  <div>
+    <h2>评论列表</h2>
+    <div class="container">
+      <Add></Add>
+      <List></List>
+    </div>
   </div>
 </template>
 
 <script>
+import Add from './components/Add'
+import Item from './components/Item'
+import List from './components/List'
+import {mapState} from 'vuex'
 export default {
-  data () {
-    return {
-      // count: 0
-    }
-  },
   computed: {
-    evenOrOdd() {
-      return this.$store.getters.evenOrOdd
-    }
+    ...mapState(['comments'])
+  },
+
+  mounted () {
+    // 发送命令给action:异步获取数据
+    this.$store.dispatch('readComments')
+  },
+  components: {
+    Add,
+    Item,
+    List
   },
   methods: {
-    increment() {
-      // 通知vuex去更新
-      this.$store.dispatch('increment') // 触发store中的action
-      // this.count++
-    },
-    decrement() {
-      this.$store.dispatch('decrement')
-      // this.count--
-    },
-    incrementIfOdd() {
-      this.$store.dispatch('incrementIfOdd')
-      // if (this.count % 2 === 1) {
-      //   this.count++
-      // }
-    },
-    incrementAsync() {
-      this.$store.dispatch('incrementAsync')
-      // setTimeout(() => {
-      //   this.count++
-      // }, 1000)
-    }
+    // selectAllComment(check) {
+    //   this.comments.forEach(comment => {
+    //     comment.selected = check
+    //   })
+    // }
   }
 }
 </script>
